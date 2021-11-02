@@ -1,0 +1,25 @@
+{
+  "id": "96b7fcaa-1819-48e4-8ca2-6a03cc73fe02",
+  "name": "FrontEndWebShop",
+  "publisher": "Default publisher",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "18.0.0.0",
+  "idRanges": [
+    {
+      "from": 50400,
+      "to": 50449
+    }
+  ],
+  "showMyCode": true,
+  "runtime": "7.0"
+}
