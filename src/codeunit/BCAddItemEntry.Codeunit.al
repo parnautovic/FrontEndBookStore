@@ -18,6 +18,8 @@ codeunit 50401 "BCAddItemEntry"
         BCCartLine.SetRange(BCCartLine."No.", BCBookItem."No.");
         if BCCartLine.IsEmpty() then begin
             BCCartLine.Init();
+
+
             BCCartLine."Cart No." := 0;
             BCCartLine.Validate("No.", BCBookItem."No.");
             BCCartLine.Validate(Description, BCBookItem.Description);
