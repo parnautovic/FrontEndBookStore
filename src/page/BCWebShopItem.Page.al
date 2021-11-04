@@ -5,11 +5,13 @@ page 50400 "BCWebShopItem"
     Caption = 'Book Store';
     PageType = List;
     SourceTable = "BCBook Item";
+    CardPageId = BCBookItemCard;
     Editable = false;
     ModifyAllowed = false;
     DeleteAllowed = false;
     InsertAllowed = false;
     AdditionalSearchTerms = 'Web Shop';
+
 
 
     layout
@@ -37,11 +39,29 @@ page 50400 "BCWebShopItem"
                     ApplicationArea = All;
                     Caption = 'Unit Price';
                 }
-                field(Comment; Rec.Comment)
+                field(Author; Rec.Author)
                 {
-                    ToolTip = 'Specifies the value of the Comment field.';
+                    ToolTip = 'Specifies the value of the Author field.';
                     ApplicationArea = All;
-                    Caption = 'Comment';
+                    Caption = 'Author';
+                }
+                field(Image; Rec.Image)
+                {
+                    ToolTip = 'Specifies the value of the Imgag field.';
+                    ApplicationArea = All;
+                    Caption = 'Image';
+                }
+                // field(BookUser; Rec.BookUser)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Book User';
+
+                // }
+                field("Item Category Code"; Rec."Item Category Code")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Item Category Code field.';
+                    Caption = 'Item Category Code';
                 }
             }
         }
@@ -50,7 +70,7 @@ page 50400 "BCWebShopItem"
             part(Info; BCCartInfo)
             {
                 ApplicationArea = All;
-                //SubPageLink = "No." = field("No.");
+                // SubPageLink = "No." = field("No.");
             }
         }
     }
@@ -67,16 +87,33 @@ page 50400 "BCWebShopItem"
                 Image = AddAction;
                 PromotedOnly = true;
                 PromotedCategory = Process;
-                Caption = 'AddToCart';
+                Caption = 'Add To Cart';
 
                 trigger OnAction()
                 var
                     BCAddItemEntry: Codeunit BCAddItemEntry;
                 begin
                     BCAddItemEntry.Run(Rec);
-
                 end;
 
+            }
+            action(DeleteCart)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                ToolTip = 'Executes the Delete Cart action.';
+                Image = Delete;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+                Caption = 'Delete Cart';
+
+                trigger OnAction()
+                var
+                    BCCartLine: Record "BCCart Line";
+                begin
+                    BCCartLine.DeleteAll(true);
+
+                end;
             }
         }
     }
@@ -90,6 +127,9 @@ page 50400 "BCWebShopItem"
         Rec.DeleteAll(true);
         BCWebShopService.Run();
     end;
+
+
+
 
 
 

@@ -7,6 +7,7 @@ page 50401 "BCWebShop Setup"
     ApplicationArea = All;
     UsageCategory = Administration;
     DeleteAllowed = false;
+
     InsertAllowed = false;
     AdditionalSearchTerms = 'Web Shop';
 
@@ -42,6 +43,18 @@ page 50401 "BCWebShop Setup"
                     ApplicationArea = All;
                     Caption = 'Backend Username';
                 }
+
+            }
+            group("User Credentials")
+            {
+                Caption = 'User Credentials';
+                field(Username; BCLoginUser.GetUser())
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the GetUser() field.';
+                    Caption = 'Username';
+
+                }
             }
         }
     }
@@ -56,6 +69,9 @@ page 50401 "BCWebShop Setup"
             Rec.Insert();
         end;
     end;
+
+    var
+        BCLoginUser: Codeunit BCLoginUser;
 
 
 }

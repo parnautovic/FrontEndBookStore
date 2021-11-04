@@ -20,11 +20,39 @@ table 50400 "BCBook Item"
             Caption = 'Unit Price';
             DataClassification = CustomerContent;
         }
-        field(4; Comment; Text[100])
+        field(4; Author; Text[100])
         {
-            Caption = 'Comment';
+            Caption = 'Author';
             DataClassification = CustomerContent;
         }
+        field(5; Image; MediaSet)
+        {
+            Caption = 'Image';
+            DataClassification = CustomerContent;
+        }
+        field(6; "Item Category Code"; Code[20])
+        {
+            Caption = 'Item Category Code';
+            DataClassification = CustomerContent;
+
+        }
+        // field(7; ImageDataBase64; Text[250])
+        // {
+        //     DataClassification = CustomerContent;
+        // }
+        // field(8; Mime; Text[250])
+        // {
+        // }
+        // field(9; PictureName; Text[250])
+        // {
+        // }
+
+        // field(5; BookUser; Text[250])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     Caption = 'Book User';
+        // }
+
 
 
     }
