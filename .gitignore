@@ -1,1 +1,4 @@
-.alpackages/Microsoft_Application_18.5.29545.0.app
+..vscode/.alpackages/*.*
+.alpackages/*.*
+*.app
+.vscode/*.*
