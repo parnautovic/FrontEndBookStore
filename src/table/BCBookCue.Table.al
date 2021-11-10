@@ -20,13 +20,13 @@ table 50403 "BCBook Cue"
         {
             Caption = 'Serbian';
             FieldClass = FlowField;
-            CalcFormula = count("BCBook Item" where("Item Category Code" = const('SRB')));
+            CalcFormula = count("BCBook Item" where("Item Category Code" = const('SRB_BOOK')));
         }
         field(4; "Item CategoryENG"; Integer)
         {
             Caption = 'English';
             FieldClass = FlowField;
-            CalcFormula = count("BCBook Item" where("Item Category Code" = const('ENG')));
+            CalcFormula = count("BCBook Item" where("Item Category Code" = const('ENG_BOOK')));
         }
     }
     keys

@@ -36,22 +36,7 @@ table 50400 "BCBook Item"
             DataClassification = CustomerContent;
 
         }
-        // field(7; ImageDataBase64; Text[250])
-        // {
-        //     DataClassification = CustomerContent;
-        // }
-        // field(8; Mime; Text[250])
-        // {
-        // }
-        // field(9; PictureName; Text[250])
-        // {
-        // }
 
-        // field(5; BookUser; Text[250])
-        // {
-        //     DataClassification = ToBeClassified;
-        //     Caption = 'Book User';
-        // }
 
 
 

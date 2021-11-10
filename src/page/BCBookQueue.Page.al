@@ -34,6 +34,8 @@ page 50406 "BCBook Queue"
                     Style = Attention;
                     DrillDownPageId = BCWebShopItem;
                     Caption = 'No. of Books in Serbian';
+
+
                 }
                 field("Item CategoryENG"; Rec."Item CategoryENG")
                 {
@@ -52,6 +54,7 @@ page 50406 "BCBook Queue"
         {
             group(Login)
             {
+                Caption = 'Login';
 
                 action("Login/Register")
                 {
@@ -66,14 +69,17 @@ page 50406 "BCBook Queue"
         }
     }
 
-    trigger OnOpenPage()
+    // trigger OnOpenPage()
 
-    begin
-        Rec.Reset();
-        if not Rec.Get() then begin
-            Rec.Init();
-            Rec.Insert();
-        end;
-    end;
+    // begin
+
+
+    //     Rec.Reset();
+    //     if not Rec.Get() then begin
+    //         Rec.Init();
+    //         Rec.Insert();
+    //     end;
+
+    // end;
 
 }

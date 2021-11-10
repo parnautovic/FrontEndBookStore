@@ -13,6 +13,7 @@ page 50407 "BCBook HeadLine"
             group(General)
             {
                 ShowCaption = false;
+                Caption = 'General';
                 field(GreetingText; 'Welcome!')
                 {
                     ApplicationArea = Basic, Suite;

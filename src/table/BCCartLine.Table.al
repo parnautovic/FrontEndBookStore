@@ -42,30 +42,28 @@ table 50402 "BCCart Line"
         {
             Caption = 'Amount';
             DataClassification = CustomerContent;
-            trigger OnValidate()
-            begin
-                Amount := Quantity * "Unit Price";
-            end;
+            // trigger OnValidate()
+            // begin
+            //     Rec.Amount := Rec.Quantity * Rec."Unit Price";
+            // end;
+
         }
         field(7; "Book User"; Text[250])
         {
-            DataClassification = CustomerContent;
             Caption = 'Book User';
+            DataClassification = CustomerContent;
+            // Editable = false;
 
         }
-        field(8; TotalAmount; Decimal)
+        field(8; "User number"; Text[250])
         {
-            Caption = 'Total Amount';
+            Caption = 'User number';
             DataClassification = CustomerContent;
 
         }
-        field(10; "Item Image"; MediaSet)
-        {
-            Caption = 'Item Image';
-            FieldClass = FlowField;
-            CalcFormula = lookup("BCBook Item".Image where("No." = field("No.")));
-            Editable = false;
-        }
+
+
+
 
     }
     keys
@@ -78,14 +76,11 @@ table 50402 "BCCart Line"
         {
 
         }
-        key(Key2; "Book User")
-        {
-
-        }
     }
 
     procedure CalcAmount(): Decimal;
     begin
+
         Rec.Amount := Rec.Quantity * Rec."Unit Price";
         exit(Rec.Amount);
     end;
@@ -97,5 +92,11 @@ table 50402 "BCCart Line"
         Rec.CalcSums(Quantity);
         exit(Rec.Quantity);
     end;
+
+
+
+
+
+
 
 }

@@ -19,10 +19,25 @@ codeunit 50402 "BCLoginUser"
         Username := UsernameTxt;
     end;
 
+
     procedure GetUser(): Text
     begin
         exit(Username);
     end;
+
+    procedure SetUserCustomerNo("Customer No.": Text)
+    begin
+        IsolatedStorage.Set(Username + 'ID', "Customer No.")
+    end;
+
+    procedure GetUserCustomerNo() UserNo: Text
+    begin
+        if Username <> '' then
+            IsolatedStorage.Get(Username + 'ID', UserNo);
+    end;
+
+
+
 
     procedure ValidatePassword(Password: Text[250])
     var
@@ -36,5 +51,6 @@ codeunit 50402 "BCLoginUser"
 
     var
         Username: Text;
+
 
 }

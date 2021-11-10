@@ -51,12 +51,7 @@ page 50400 "BCWebShopItem"
                     ApplicationArea = All;
                     Caption = 'Image';
                 }
-                // field(BookUser; Rec.BookUser)
-                // {
-                //     ApplicationArea = All;
-                //     Caption = 'Book User';
 
-                // }
                 field("Item Category Code"; Rec."Item Category Code")
                 {
                     ApplicationArea = All;
@@ -92,9 +87,29 @@ page 50400 "BCWebShopItem"
                 trigger OnAction()
                 var
                     BCAddItemEntry: Codeunit BCAddItemEntry;
+                    BCLoginUser: Codeunit BCLoginUser;
                 begin
-                    BCAddItemEntry.Run(Rec);
+                    if BCLoginUser.GetUser() <> '' then
+                        BCAddItemEntry.Run(Rec)
+                    else
+                        Message('You have to Login First.');
+
+
                 end;
+
+            }
+            action(Cart)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                ToolTip = 'Executes the Cart action.';
+                Image = AddAction;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+                Caption = 'View Cart';
+
+                RunObject = page "BCCart List";
+
 
             }
             action(DeleteCart)
@@ -110,10 +125,76 @@ page 50400 "BCWebShopItem"
                 trigger OnAction()
                 var
                     BCCartLine: Record "BCCart Line";
+                    Question: Text;
+                    Answer: Boolean;
+                    Text000Lbl: Label 'Do you want to delete all item in the cart?';
                 begin
-                    BCCartLine.DeleteAll(true);
+
+                    Question := Text000Lbl;
+                    Answer := Dialog.Confirm(Question, true);
+                    //Message(Text001Lbl, Answer);
+                    if Answer then begin
+                        BCCartLine.DeleteAll(true);
+                        Message('You successfully deleted all items in cart.');
+                    end;
 
                 end;
+            }
+            action(Borrow)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                ToolTip = 'Executes the Delete Cart action.';
+                Image = Bank;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+                Caption = 'Borrow';
+
+                trigger OnAction()
+                var
+                    BCLoginUser: Codeunit BCLoginUser;
+                begin
+                    if (BCLoginUser.GetUser() = '') then
+                        Message('Loginuj se.')
+                    else
+                        Message(BCLoginUser.GetUser());
+
+                end;
+
+
+            }
+            action(Buy)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                ToolTip = 'Executes Buy action.';
+                Image = Check;
+                PromotedOnly = true;
+                PromotedCategory = Process;
+                Caption = 'Buy';
+
+                trigger OnAction()
+                var
+                    BCCartLine: Record "BCCart Line";
+                    BCCartBuy: Codeunit BCCartBuy;
+                    BCLoginUser: Codeunit BCLoginUser;
+
+                begin
+                    if BCLoginUser.GetUser() <> '' then begin
+                        if not BCCartLine.IsEmpty then begin
+                            BCCartBuy.Run();
+                            BCCartLine.DeleteAll();
+                            CurrPage.Update();
+                        end
+
+                        else
+                            Message('Your Cart is Empty.');
+                    end
+                    else
+                        Message('You have to Login First.');
+                end;
+
+
             }
         }
     }

@@ -49,9 +49,13 @@ page 50403 "BCLoginRegisterUser"
                 trigger OnAction()
                 var
                     BCLoginUser: Codeunit BCLoginUser;
+                    BCCartCustomer: Codeunit BCCartCustomer;
                 begin
                     BCLoginUser.SetUser(Username);
                     BCLoginUser.Register(Password);
+                    BCCartCustomer.Run();
+
+
                     CurrPage.Close();
                 end;
             }
@@ -70,7 +74,9 @@ page 50403 "BCLoginRegisterUser"
                     BCLoginUser: codeunit BCLoginUser;
                 begin
                     BCLoginUser.SetUser(Username);
+
                     BCLoginUser.ValidatePassword(Password);
+
                     CurrPage.Close();
                 end;
             }

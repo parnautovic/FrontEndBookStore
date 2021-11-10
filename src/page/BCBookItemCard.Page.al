@@ -47,6 +47,7 @@ page 50404 "BCBookItemCard"
                     ApplicationArea = All;
                     Caption = 'Item Category Code';
                 }
+
             }
         }
     }

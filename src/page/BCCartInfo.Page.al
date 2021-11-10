@@ -4,7 +4,7 @@ page 50402 "BCCartInfo"
     Caption = 'CartInfo';
     PageType = ListPart;
     SourceTable = "BCCart Line";
-    //  SourceTableView = sorting(BCCartLine) where("Book User"= const());
+
 
     layout
     {
@@ -43,15 +43,23 @@ page 50402 "BCCartInfo"
                     ToolTip = 'Specifies the value of the Amount field.';
                     ApplicationArea = All;
                     Caption = 'Amount';
+
                 }
-                field("Book User"; BCLoginUser.GetUser())
+                field("Book User"; Rec."Book User")
                 {
+                    ToolTip = 'Specifies the value of the Book User field.';
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the FillUser() field.';
-                    Caption = 'Book User';
+                    Caption = 'User';
 
 
                 }
+                field("Book User No."; Rec."User number")
+                {
+                    ToolTip = 'Specifies the value of the Book User No. field.';
+                    ApplicationArea = All;
+                    Caption = 'User number';
+                }
+
 
 
             }
@@ -64,26 +72,33 @@ page 50402 "BCCartInfo"
                     ToolTip = 'Specifies the value of the CalcTotalQuantity() field.';
                     ApplicationArea = All;
                     Caption = 'Total Quantity';
-                }
-                field(Image; Rec."Item Image")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Image';
-                    ToolTip = 'Specifies the value of the Image field.';
-
 
                 }
+                // field("Total Amount"; Rec.CalcTotalAmount())
+                // {
+                //     ToolTip = 'Specifies the value of the CalcTotalQuantity() field.';
+                //     ApplicationArea = All;
+                //     Caption = 'Total Amount';
+                //     trigger OnDrillDown()
+
+                //     begin
+                //         CurrPage.SaveRecord();
+                //         Page.Run(Page::BCCartInfo);
+                //     end;
+                // }
+
             }
         }
     }
 
 
+    trigger OnOpenPage()
+    var
+    begin
+        Rec.SetRange("Book User", BCLoginUser.GetUser());
+        CurrPage.Update();
+    end;
 
-    // trigger OnOpenPage()
-    // ;
-    // begin
-    //     Rec.DeleteAll(true);
-    // end;
 
     var
         BCLoginUser: Codeunit BCLoginUser;
