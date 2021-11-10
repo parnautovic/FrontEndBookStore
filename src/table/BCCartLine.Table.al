@@ -61,10 +61,16 @@ table 50402 "BCCart Line"
             DataClassification = CustomerContent;
 
         }
-
-
-
-
+        field(9; "Borrow No. Days"; Integer)
+        {
+            Caption = 'Day number';
+            DataClassification = CustomerContent;
+        }
+        field(10; "Start Date"; Date)
+        {
+            Caption = 'Start Date';
+            DataClassification = CustomerContent;
+        }
     }
     keys
     {

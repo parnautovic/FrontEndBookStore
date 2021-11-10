@@ -48,38 +48,17 @@ page 50406 "BCBook Queue"
             }
         }
     }
-    actions
-    {
-        area(Processing)
-        {
-            group(Login)
-            {
-                Caption = 'Login';
-
-                action("Login/Register")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Login/Register';
-                    Promoted = true;
-                    PromotedOnly = true;
-                    RunObject = Page BCLoginRegisterUser;
-                    ToolTip = 'Executes the Login/Register action.';
-                }
-            }
-        }
-    }
-
-    // trigger OnOpenPage()
-
-    // begin
 
 
-    //     Rec.Reset();
-    //     if not Rec.Get() then begin
-    //         Rec.Init();
-    //         Rec.Insert();
-    //     end;
+    trigger OnOpenPage()
 
-    // end;
+    begin
+        Rec.Reset();
+        if not Rec.Get() then begin
+            Rec.Init();
+            Rec.Insert();
+        end;
+
+    end;
 
 }

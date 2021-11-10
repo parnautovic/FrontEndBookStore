@@ -2,15 +2,15 @@ codeunit 50406 "BCSOAPRequest"
 {
     procedure SendToPost(No: Text)
     var
-        BCCartBuy: Codeunit BCCartBuy;
+
         httpClient: HttpClient;
         httpContent: HttpContent;
         httpResponse: HttpResponseMessage;
         httpHeaders: HttpHeaders;
-        httpRequestMsg: HttpRequestMessage;
+
         ResponseText: Text;
         WebErrorMsg: Label 'Error occurred: %1', Comment = '%1 is http status code';
-        WebErrorMsg2: Label 'Error on server side: %1, Error Text Number 2', Comment = '%1 is http status code,%2 is eror 2.';
+        WebErrorMsg2Lbl: Label 'Error on server side: %1, Error Text Number 2', Comment = '%1 is http status code,%2 is eror 2.';
 
 
     begin
@@ -41,10 +41,10 @@ codeunit 50406 "BCSOAPRequest"
         if httpResponse.IsSuccessStatusCode() then begin
 
             httpResponse.Content.ReadAs(ResponseText);
-            Message('SOAP was successfully sent: \\' + ParseResponse(ResponseText));
+            Message('Purchase' + ParseResponse(ResponseText));
 
         end else
-            Error(WebErrorMsg2, httpResponse.HttpStatusCode(), ParseResponseError(ResponseText));
+            Error(WebErrorMsg2Lbl, httpResponse.HttpStatusCode(), ParseResponseError(ResponseText));
     end;
 
     /// <summary>

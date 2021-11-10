@@ -39,6 +39,8 @@ codeunit 50402 "BCLoginUser"
 
 
 
+
+
     procedure ValidatePassword(Password: Text[250])
     var
         PasswordToCheck: Text;

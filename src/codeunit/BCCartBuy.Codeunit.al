@@ -4,6 +4,7 @@ codeunit 50405 "BCCartBuy"
     var
         BCCartLine: Record "BCCart Line";
         BCSOAPRequest: Codeunit BCSOAPRequest;
+        BCLoginUser: Codeunit BCLoginUser;
         SDJsonObject: JsonObject;
         SLJsonObject: JsonObject;
         LineResult: Text;
@@ -19,6 +20,7 @@ codeunit 50405 "BCCartBuy"
         OrderLinePath := getOrderLinePath(GetFieldValue('id', SDJsonObject).AsText());
 
         NewLineNum := 1000;
+        BCCartLine.SetRange(BCCartLine."Book User", BCLoginUser.GetUser());
         if BCCartLine.FindSet() then
             repeat
                 NewLineNum := NewLineNum + 1;

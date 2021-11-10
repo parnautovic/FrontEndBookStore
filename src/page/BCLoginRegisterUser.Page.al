@@ -54,7 +54,7 @@ page 50403 "BCLoginRegisterUser"
                     BCLoginUser.SetUser(Username);
                     BCLoginUser.Register(Password);
                     BCCartCustomer.Run();
-
+                    Message('You have successfully registered.');
 
                     CurrPage.Close();
                 end;
@@ -76,7 +76,7 @@ page 50403 "BCLoginRegisterUser"
                     BCLoginUser.SetUser(Username);
 
                     BCLoginUser.ValidatePassword(Password);
-
+                    Message('You have successfully login as ' + BCLoginUser.GetUser());
                     CurrPage.Close();
                 end;
             }

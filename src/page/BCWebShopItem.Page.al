@@ -125,6 +125,7 @@ page 50400 "BCWebShopItem"
                 trigger OnAction()
                 var
                     BCCartLine: Record "BCCart Line";
+                    BCLoginUser: Codeunit BCLoginUser;
                     Question: Text;
                     Answer: Boolean;
                     Text000Lbl: Label 'Do you want to delete all item in the cart?';
@@ -134,6 +135,7 @@ page 50400 "BCWebShopItem"
                     Answer := Dialog.Confirm(Question, true);
                     //Message(Text001Lbl, Answer);
                     if Answer then begin
+                        BCCartLine.SetRange(BCCartLine."Book User", BCLoginUser.GetUser());
                         BCCartLine.DeleteAll(true);
                         Message('You successfully deleted all items in cart.');
                     end;
@@ -155,7 +157,7 @@ page 50400 "BCWebShopItem"
                     BCLoginUser: Codeunit BCLoginUser;
                 begin
                     if (BCLoginUser.GetUser() = '') then
-                        Message('Loginuj se.')
+                        Message('Login first.')
                     else
                         Message(BCLoginUser.GetUser());
 
@@ -183,6 +185,7 @@ page 50400 "BCWebShopItem"
                     if BCLoginUser.GetUser() <> '' then begin
                         if not BCCartLine.IsEmpty then begin
                             BCCartBuy.Run();
+                            BCCartLine.SetRange(BCCartLine."Book User", BCLoginUser.GetUser());
                             BCCartLine.DeleteAll();
                             CurrPage.Update();
                         end
@@ -203,9 +206,11 @@ page 50400 "BCWebShopItem"
 
     trigger OnOpenPage()
     var
+        BCBookItem: Record "BCBook Item";
         BCWebShopService: Codeunit BCWebShopService;
     begin
-        Rec.DeleteAll(true);
+        BCBookItem.DeleteAll();
+
         BCWebShopService.Run();
     end;
 

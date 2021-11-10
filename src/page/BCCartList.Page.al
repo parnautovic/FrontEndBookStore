@@ -57,12 +57,13 @@ page 50408 "BCCart List"
         }
     }
 
-    // trigger OnOpenPage()
-    // var
-    // begin
-    //     Rec.SetRange(Rec."Book User", BCLoginUser.GetUser());
-    //     CurrPage.Update();
-    // end;
+    trigger OnOpenPage()
+    var
+        BCLoginUser: Codeunit BCLoginUser;
+    begin
+        Rec.SetRange(Rec."Book User", BCLoginUser.GetUser());
+        CurrPage.Update();
+    end;
 
 
 

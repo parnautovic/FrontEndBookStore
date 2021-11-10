@@ -1,5 +1,6 @@
 codeunit 50400 "BCWebShopService"
 {
+
     trigger OnRun()
     var
         BCWebShopSetUp: Record BCWebShopSetUp;
@@ -15,7 +16,6 @@ codeunit 50400 "BCWebShopService"
         AuthLbl: Label 'Basic %1', Comment = '%1 is AuthString';
     begin
         BCWebShopSetup.Get();
-
         // TODO - new procedure for authorization
         AuthString := StrSubstNo(UserPwdTok, BCWebShopSetUp."Backend Username", BCWebShopSetUp."Backend Password");
         AuthString := Base64Convert.ToBase64(AuthString);
